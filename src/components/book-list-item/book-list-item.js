@@ -1,7 +1,13 @@
+import { useDispatch } from 'react-redux';
+
 import './book-list-item.css';
 
+import { itemAdd as cartItemAdd } from '../../features/cart';
+
 const BookListItem = ({ book }) => {
-  const { title, author, price, coverImage } = book;
+  const dispatch = useDispatch();
+
+  const { id, title, author, price, coverImage } = book;
   
   return (
     <div className="book-list-item">
@@ -12,7 +18,9 @@ const BookListItem = ({ book }) => {
         <a href="#" className="book-title">{title}</a>
         <div className="book-author">{author}</div>
         <div className="book-price">${price}</div>
-        <button className="btn btn-info add-to-cart">Add to cart</button>
+        <button 
+          className="btn btn-info add-to-cart"
+          onClick={() => dispatch(cartItemAdd(book))}>Add to cart</button>
       </div>
     </div>
   );

@@ -34,10 +34,9 @@ const booksSlice = createSlice({
   }
 });
 
-export const { bookLoaded } = booksSlice.actions;
-
 export default booksSlice.reducer;
 
 export const {
-  selectAll: selectAllBooks
+  selectAll: selectAllBooks,
+  selectById: selectBookById,
 } = booksAdapter.getSelectors(state => state.books);

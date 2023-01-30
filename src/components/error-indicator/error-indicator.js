@@ -1,8 +1,9 @@
 import './error-indicator.css';
 
-const ErrorIndicator = () => {
+const ErrorIndicator = ( { error='' }) => {
+
   return (
-    <h2>Some error!</h2>
+    <h2>{`Some error! ${error}`}</h2>
   );
 }
 

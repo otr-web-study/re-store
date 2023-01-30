@@ -1,7 +1,9 @@
 import reducer, {
-  bookLoaded, fetchAllBooks, selectAllBooks 
+  fetchAllBooks,
+  selectAllBooks,
+  selectBookById,
 } from './bookSlice';
 
 export default reducer;
 
-export { bookLoaded, fetchAllBooks, selectAllBooks };
+export { fetchAllBooks, selectAllBooks, selectBookById };
