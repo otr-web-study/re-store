@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import './book-list-item.css';
 
@@ -15,7 +16,7 @@ const BookListItem = ({ book }) => {
         <img src={coverImage} alt="cover" />
       </div>
       <div className="book-details">
-        <a href="#" className="book-title">{title}</a>
+        <Link to={`books/${id}`} className="book-title">{title}</Link>
         <div className="book-author">{author}</div>
         <div className="book-price">${price}</div>
         <button 

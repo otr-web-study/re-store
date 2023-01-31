@@ -7,6 +7,7 @@ import './shopping-cart-table.css';
 
 const ShoppingCartTable = () => {
   const cartItemIds = useSelector(selectAllCartIds);
+  const total = useSelector(state => state.cart.total);
 
   const content = cartItemIds.map((itemId, idx) => {
     return (
@@ -36,7 +37,7 @@ const ShoppingCartTable = () => {
       </table>
 
       <div className="total">
-        Total: $201
+        Total: ${total}
       </div>
     </div>
   );

@@ -41,7 +41,6 @@ const BookList = () => {
     return <ErrorIndicator error={error}/>;
   }
 
-
   return content;
 };
 

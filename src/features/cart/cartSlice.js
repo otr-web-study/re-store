@@ -1,9 +1,10 @@
-import { createSlice, createEntityAdapter, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 
 const cartAdapter = createEntityAdapter();
 
 const initialState = cartAdapter.getInitialState({
   total: 0,
+  count: 0,
 })
 
 const prepareItem = (id, total, count) => {
@@ -37,25 +38,44 @@ const updateOrder = (state, action) => {
   });
 }
 
+const updateTotalSum = (state) => {
+  const { ids, entities } = state;
+  state.total = ids.reduce((acc, current) => {
+    return acc + entities[current].total;
+  }, 0);
+  state.count = ids.length;
+}
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     itemAdd: {
-      reducer: updateOrder,
+      reducer: (state, action) => {
+        updateOrder(state, action);
+        updateTotalSum(state);
+      },
       prepare: ({id, price}) => prepareItem(id, price, 1)
     },
     itemIncrease: {
-      reducer: updateOrder,
+      reducer: (state, action) => {
+        updateOrder(state, action);
+        updateTotalSum(state);
+      },
       prepare: ({id, price}) => prepareItem(id, price, 1)
     },
     itemDecrease: {
-      reducer: updateOrder,
+      reducer: (state, action) => {
+        updateOrder(state, action);
+        updateTotalSum(state);
+      },
       prepare: ({id, price}) => prepareItem(id, price, -1)
-    }
-
+    },
+    itemDelete: (state, action) => {
+      cartAdapter.removeOne(state, action);
+      updateTotalSum(state);
+    },
   },
-    itemDelete: cartAdapter.removeOne,
 });
 
 export const { itemIncrease, itemDecrease, itemDelete, itemAdd } = cartSlice.actions;

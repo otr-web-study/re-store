@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import {
   selectCartItemById, itemIncrease, itemDecrease, itemDelete
@@ -19,13 +20,17 @@ const ShoppingCartItem = ({itemId, idx}) => {
   return (
     <>
       <td>{idx + 1}</td>
-      <td>{<Book bookId={itemId} />}</td>
+      <td>
+        <Link to={`/books/${itemId}`}>
+          {<Book bookId={itemId} />}
+        </Link>
+      </td>
       <td>{count}</td>
       <td>{total}</td>
       <td>
         <button 
           className="btn btn-outline-danger btn-sm float-right"
-          onClick={() => dispatch(itemDecrease(book))}>
+          onClick={() => dispatch(itemDelete(itemId))}>
           <i className="fa fa-trash-o" />
         </button>
         <button 
@@ -35,7 +40,7 @@ const ShoppingCartItem = ({itemId, idx}) => {
         </button>
         <button 
           className="btn btn-outline-warning btn-sm float-right"
-          onClick={() => dispatch(itemDelete(itemId))}>
+          onClick={() => dispatch(itemDecrease(book))}>
           <i className="fa fa-minus-circle" />
         </button>
       </td>

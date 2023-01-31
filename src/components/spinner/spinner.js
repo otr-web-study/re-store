@@ -2,7 +2,13 @@ import './spinner.css';
 
 const Spinner = () => {
   return (
-    <h2>Wait...</h2>
+    <>
+      <div className="loadingio-spinner-eclipse-ijt22ndy84a">
+        <div className="ldio-7b04pbr9rbw">
+          <div></div>
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -1,6 +1,8 @@
+import SoppingCartTable from '../shopping-cart-table';
+
 const CartPage = () => {
   return (
-    <div>Cart Page</div>
+    <SoppingCartTable />
   );
 };
 
