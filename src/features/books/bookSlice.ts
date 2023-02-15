@@ -1,18 +1,27 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
+import { Book } from "types/book";
+import { Status } from "types/status";
 
 import client from '../../services/bookstore-service';
 
-const booksAdapter = createEntityAdapter();
+interface InitialState {
+  status: Status,
+  error: string | null,
+}
 
-const initialState = booksAdapter.getInitialState({
+export const booksAdapter = createEntityAdapter<Book>();
+
+const initialState = booksAdapter.getInitialState<InitialState>({
   status: 'idle',
   error: null,
 })
 
-export const fetchAllBooks = createAsyncThunk('books/fetchBooks', async () => {
-  const books = await client.getBooks();
-  return books;
-})
+export const fetchAllBooks = createAsyncThunk<Book[], undefined>(
+  'books/fetchBooks', 
+  async () => {
+    const books = await client.getBooks();
+    return books;
+  });
 
 const booksSlice = createSlice({
   name: 'books', 
@@ -20,7 +29,7 @@ const booksSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchAllBooks.pending, (state, action) => {
+      .addCase(fetchAllBooks.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(fetchAllBooks.fulfilled, (state, action) => {
@@ -29,14 +38,10 @@ const booksSlice = createSlice({
       })
       .addCase(fetchAllBooks.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        if (action.error.message)
+          state.error = action.error.message;
       })
   }
 });
 
 export default booksSlice.reducer;
-
-export const {
-  selectAll: selectAllBooks,
-  selectById: selectBookById,
-} = booksAdapter.getSelectors(state => state.books);

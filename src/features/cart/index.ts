@@ -1,13 +1,15 @@
-import reducer from "./cartSlice";
+import reducer from './cartSlice';
 import { 
   itemIncrease, 
   itemDecrease, 
   itemDelete,
   itemAdd,
+ } from './cartSlice';
+ import {
   selectAllCartItems,
   selectAllCartIds,
   selectCartItemById,
- } from "./cartSlice";
+ } from './cartSelectors';
 
 export default reducer;
 

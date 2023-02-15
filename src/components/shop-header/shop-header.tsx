@@ -2,8 +2,12 @@ import { Link } from 'react-router-dom';
 
 import './shop-header.css';
 
+interface ShopHeaderProps {
+  numItems: number,
+  total: number,
+}
 
-const ShopHeader = ({ numItems, total }) => {
+const ShopHeader = ({ numItems, total }: ShopHeaderProps) => {
   return (
     <header className="shop-header row">
       <Link to="/" className="logo text-dark">

@@ -1,13 +1,13 @@
 import './app.css';
 import { Routes, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from 'redux-hooks';
 
 import { HomePage, CartPage, BookPage } from '../pages';
 import ShopHeader from '../shop-header';
 
 const App = () => {
-  const total = useSelector(state => state.cart.total);
-  const count = useSelector(state => state.cart.count);
+  const total = useAppSelector(state => state.cart.total);
+  const count = useAppSelector(state => state.cart.count);
   return (
     <main role='main' className='container'>
       <ShopHeader numItems={count} total={total} />

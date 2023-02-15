@@ -1,8 +1,12 @@
-import { Component } from "react";
+import { Component, PropsWithChildren } from "react";
 
 import ErrorIndicator from "../error-indicator";
 
-class ErrorBoundary extends Component {
+interface ErrorBoundaryState {
+  hasError: boolean,
+}
+
+class ErrorBoundary extends Component<PropsWithChildren<{}>, ErrorBoundaryState> {
 
   state = {
     hasError: false,

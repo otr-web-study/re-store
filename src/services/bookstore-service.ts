@@ -1,6 +1,8 @@
+import { Book } from "types/book";
+
  class BookStoreService {
 
-  data = [
+  data: Book[] = [
     {
       id: 1,
       title: 'Production-Ready Microservices',
@@ -15,7 +17,7 @@
       coverImage: 'https://images-na.ssl-images-amazon.com/images/I/414CRjLjwgL._SX403_BO1,204,203,200_.jpg'},
   ]
 
-  getBooks() {
+  async getBooks(): Promise<Book[]> {
     return new Promise((resolve, reject) => {
       return setTimeout(() => resolve(this.data), 1000);
       // return setTimeout(() => reject(new Error('Something went wrong...')), 1000);

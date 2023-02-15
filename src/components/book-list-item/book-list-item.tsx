@@ -1,12 +1,12 @@
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { useAppDispatch } from 'redux-hooks';
+import { itemAdd as cartItemAdd } from 'features/cart';
+import { Book } from 'types/book';
 import './book-list-item.css';
 
-import { itemAdd as cartItemAdd } from '../../features/cart';
-
-const BookListItem = ({ book }) => {
-  const dispatch = useDispatch();
+const BookListItem = ({ book }: {book: Book}) => {
+  const dispatch = useAppDispatch();
 
   const { id, title, author, price, coverImage } = book;
   
